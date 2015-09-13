@@ -1,0 +1,6 @@
+#ifndef ETIME_H_INCLUDED
+#define ETIME_H_INCLUDED
+
+
+
+#endif // ETIME_H_INCLUDED
