@@ -10,55 +10,50 @@
 
 int main(){
 
-    int childID, status;
+    int childID, status, line_print;
+    int line_count = 0;
     pid_t childPID = fork();
     char file[256] = "/proc/";
     char PID[256];
     char location[256] = "/limits";
+    char limit_string[256];
 
     if (childPID == 0)  // child process
     {
-
+        //execute command here. Get info from parent
         printf("Child process has completed.\n");
     }
     else if (childPID > 0)  // parent process
     {
         //wait for child process to finish
-
+        waitpid(childPID, &status, 0);
         childID = getpid();
         sprintf(PID, "%d", childID);
         printf("This is PID, childID: %s, %d\n", PID, childID);
         strcat(file, PID);
         strcat(file, location);
-        //printf("Info is in: %s \n", file);
-        FILE * fp;
-        char limit_string[256];
-        fp = fopen (file, "r");
+        printf("Info is in: %s \n\n", file);
 
-        while (fgets(limit_string, sizeof(limit_string), fp)) {
-        printf("%s", limit_string);
+        FILE *limit_file;
+        limit_file = fopen(file, "r");
+
+        while (fgets(limit_string, sizeof(limit_string), limit_file)) {
+                if ((line_count == 3) || (line_count ==7) || (line_count == 8) || (line_count == 12))
+                {
+                    printf("%s", limit_string);
+                }
+            line_count++;
         }
+        printf("\nParent process has completed. Child ID is %d\n", childID);
 
-        printf("Parent process has completed. Child ID is %d\n", childID);
-		waitpid(childPID, &status, 0);
-		fclose(fp);
+		fclose(limit_file);
     }
     else  // fork failed
     {
         printf("Fork() has failed!\n");
         return 1;
     }
-    /*
-    printf("|=====================================================================|\n");
-    printf("|Printing Limits for Command:                                         |\n");
-    printf("|=====================================================================|\n");
-    printf("|Max File Size:                                            Bytes      |\n");
-    printf("|Max Open Files:                                           Files      |\n");
-    printf("|Max Processes                                             Processes  |\n");
-    printf("|Max Pending Signals:                                      Signals    |\n");
-    printf("\n");
 
-    */
     return 0;
 
 }
