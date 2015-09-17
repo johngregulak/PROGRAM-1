@@ -7,6 +7,6 @@
 Notes:
 Use 'git status'
 	-if it says you are ahead of master repo then you need to add
-	-if it is add you still need to commit
+	-if anything is red you need to commit
 
 Add comments and changes here. I made this as a self reminder and help you if you need it.
