@@ -1,0 +1,12 @@
+1. git clone (Paste URL) 	//Clone repo
+2. (Make changes)
+3. git add * (or) add -A		//stage the changes
+4. git commit -m "(comments)"
+5. git push			//pushes it onto github
+
+Notes:
+Use 'git status'
+	-if it says you are ahead of master repo then you need to add
+	-if it is add you still need to commit
+
+Add comments and changes here. I made this as a self reminder and help you if you need it.
